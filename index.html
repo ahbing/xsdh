@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8/>
+<title>新手引导</title>
+<style>
+	html,body,div,a,span{padding:0;margin:0;}
+	html{height: 100%;}
+	body{height: 100%;background: url(images/body.png) no-repeat center top;}
+	#bg{width: 100%;height: 100%;background: black;opacity: 0.5;fliter:alpha(opacity:50);display: none;}
+	#box{position: absolute;left: 50%;top:0;width: 980px;height:100%;margin-left: -490px;display: none;}
+	#box div{position: absolute;display:none;}
+	#box div a{position: absolute;width:95px; height:32px;cursor: pointer;text-indent: -9999px;overflow: hidden;}
+	#box div span{display:block;position: absolute;width: 30px;height:30px;text-indent: -9999px;overflow: hidden;cursor: pointer;}
+
+	#box .stepA{ width:745px; height:329px;background:url(images/guide11.png)no-repeat;left:-9px;top:130px;}
+	#box .stepA a{left: 490px;top:232px;}
+	#box .stepA span{left:684px;top:144px;}
+
+	#box .stepB{background:url(images/guide21.png); width:647px; height:405px;top:2px; left:324px}
+	#box .stepB a{top:308px; left:146px;}
+	#box .stepB span{ top:196px; right:285px;}
+	
+	#box .stepC{ background:url(images/guide31.png); width:654px; height:257px;top:294px; left:318px}
+	#box .stepC a{top:155px; left:400px;}
+	#box .stepC span{top:44px; right:35px;}
+	
+	#box .stepD{background:url(images/guide41.png); width:558px; height:348px;top:78px; left:155px}
+	#box .stepD a{top:246px; left:304px;}
+	#box .stepD span{top:135px; right:35px;}
+	
+	#box .stepE{background:url(images/guide51.png); width:397px; height:342px;top:79px; left:250px}
+	#box .stepE a{top:245px; left:153px;}
+</style>
+
+
+
+
+<script>
+/*
+*
+*
+*  cookie本地测试只能在火狐上
+*
+*/
+
+window.onload = function()
+{
+	var oBg = document.getElementById("bg");
+	var oBox = document.getElementById("box");
+	var aDiv = oBox.getElementsByTagName("div");
+	var aA = oBox.getElementsByTagName("a");
+	var aSpan = oBox.getElementsByTagName("span");
+
+	//读取cookie
+	var res=document.cookie.substring(5);
+	//alert(res);
+	if(res!="www.cookie.com")
+	{
+		//alert(res);
+		oBg.style.display = oBox.style.display = aDiv[0].style.display="block";
+
+		for(var i = 0;i<aA.length;i++)
+		{
+			aA[i].index = i;
+			aA[i].onclick = function()
+			{
+				if(this.index<aA.length-1)
+				{
+					this.parentNode.style.display="none";
+					aDiv[this.index+1].style.display="block";
+				}
+				else if(this.index = aA.length-1)
+				{
+					aDiv[this.index].style.display = oBg.style.display = oBox.style.display="none";
+				}
+			}
+		}
+		for(var i =0 ;i<aSpan.length;i++)
+		{
+			aSpan[i].onclick = function()
+			{
+				oBox.style.display = oBg.style.display="none";
+			}
+		}
+		//添加cookie
+		var oDate = new Date();
+		oDate.setDate(oDate.getDate()+30);  //30天后过期
+		document.cookie = "name=www.cookie.com;expires="+oDate;		
+	}
+
+	
+}
+</script>
+</head>
+
+<body>
+<div id="bg"></div>
+<div id="box">
+	<div class="stepA"><a>下一步</a><span title="关闭">关闭</span></div>
+    <div class="stepB"><a>下一步</a><span title="关闭">关闭</span></div>
+    <div class="stepC"><a>下一步</a><span title="关闭">关闭</span></div>
+    <div class="stepD"><a>下一步</a><span title="关闭">关闭</span></div>
+    <div class="stepE"><a>下一步</a><span title="关闭">关闭</span></div>
+</div>
+</body>
+</html>
+
